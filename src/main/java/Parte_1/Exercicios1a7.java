@@ -10,12 +10,12 @@ public class Exercicios1a7 {
     public static void main(String[] args) {
         System.out.println(
                   "Qual atividade você deseja avaliar?\n"
-                + "Insira o número da atividade de 1 a 7");
+                + "Insira o número da atividade de 1 a 6");
         int escolha = 0;
         try {
             escolha = ent.nextInt();
-            while (escolha < 1 || escolha > 7) {
-                System.out.println("É possível escolher apenas entre 1 e 7");
+            while (escolha < 1 || escolha > 6) {
+                System.out.println("É possível escolher apenas entre 1 e 6");
                 escolha = ent.nextInt();
             }
         } catch (Exception ex){
@@ -58,12 +58,10 @@ public class Exercicios1a7 {
             case 6:
                 System.out.println(
                         "Implementar uma função que recebendo um número de início e fim, retorne um array contendo uma sequência do número de início até o número final.\n" +
-                        "Ex: (3, 8) => [3,4,5,6,7,8]\n");
-                break;
-            case 7:
-                System.out.println(
-                        "Implementar uma função que recebendo um número de início e fim, retorne um array contendo uma sequência do número final até o número inicial.\n" +
+                        "Ex: (3, 8) => [3,4,5,6,7,8]\n" +
+                        "   ou \n" +
                         "Ex: (3, 8) => [8,7,6,5,4,3]\n");
+                Exercicio6();
                 break;
         }
     }
@@ -162,24 +160,37 @@ public class Exercicios1a7 {
     
     public static void Exercicio6() {
         
+        int nInicio = nInicio();
         int nLimite = nLimite();
-        int nInicial = nInicial();
+        int tamanhoArray;
+        if (nInicio >= nLimite) {
+            tamanhoArray = (nInicio - nLimite) + 1;
+        } else {
+            tamanhoArray = (nLimite - nInicio) + 1;
+        }
         
-        //int[] nums = numsLaF(nLimite, nInicial);
+        int[] nums = numsIaF(nLimite, nInicio, tamanhoArray);
         
-        for (int pos = nLimite; pos < nInicial; pos++) {
-            
+        for (int pos = 0; pos < tamanhoArray; pos++) {
+            System.out.print(nums[pos]+" ");
         }
     }
     
-    //public static int[] numsLaF(int nLimite, int nFinal) {
-        //int[] nums = new int[nLimite]
+    public static int[] numsIaF(int nLimite, int nInicio, int tamanhoArray) {
+        int[] nums = new int[tamanhoArray];
+        if (nInicio >= nLimite) {
+            for (int pos = 0; pos < tamanhoArray; pos++) {
+                nums[pos] = nInicio;
+                nInicio--;
+            }
+        } else {
+            for (int pos = 0; pos < tamanhoArray; pos++) {
+                nums[pos] = nInicio;
+                nInicio++;
+            }
+        }
         
-        //return nums;
-    //}
-    
-    public static void Exercicio7() {
-        
+        return nums;
     }
     
     public static int[] intArray(int tamanhoArray) {
@@ -209,10 +220,10 @@ public class Exercicios1a7 {
         return nLimite;
     }
     
-    public static int nInicial() {
+    public static int nInicio() {
         System.out.println("Informe o valor Inicial: ");
-        int nInicial = ent.nextInt();
+        int nInicio = ent.nextInt();
         
-        return nInicial;
+        return nInicio;
     }
 }
